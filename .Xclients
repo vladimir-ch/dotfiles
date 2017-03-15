@@ -1,0 +1,14 @@
+xrdb merge $HOME/.Xresources &
+eval $(killall ssh-agent; ssh-agent)
+[ -x ~/.dropbox-dist/dropboxd & ]
+hash feh && feh --bg-fill ~/Pictures/wallpaper.png &
+xset r rate 200 30 &
+hash thunar && dbus-launch thunar --daemon &
+setxkbmap -layout jp,cz -variant ,qwerty -option ctrl:nocaps,grp:alt_shift_toggle
+while true
+do
+    VOLUME=$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')
+    xsetroot -name "Vol: $VOLUME | $(date +"%a %F %R")"
+    sleep 1
+done &
+exec dbus-launch dwm-start

@@ -1,0 +1,6 @@
+set bell-style none
+set show-all-if-ambiguous on
+# set editing-mode vi
+
+# Completed names which are symbolic links to directories have a slash appended.
+set mark-symlinked-directories off

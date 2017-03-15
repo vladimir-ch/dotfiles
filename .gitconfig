@@ -1,0 +1,9 @@
+[user]
+	email = vladimir.chalupecky@gmail.com
+	name = Vladimir Chalupecky
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[push]
+	default = simple
