@@ -20,11 +20,12 @@ if [ "$system_type" = "Darwin" ]; then
 fi
 
 if [ "$system_type" = "Linux" ]; then
-	release=$(lsb_release -d | gawk -F"\t" '{print $2}')
+	release=$(lsb_release -d | awk -F"\t" '{print $2}')
 	case "$release" in
 		Fedora)
 			;;
 		Ubuntu)
+			sudo apt install ruby-dev
 			;;
 	esac
 fi
@@ -57,16 +58,8 @@ cp image/font/gofont/ttfs/* ~/.fonts/gofont/ttfs
 # }}}
 
 # Lapack {{{
-if [[ -d lapack ]]; then
-	pushd lapack 
-	git pull
-	make
-	popd
-else
-	git pull https://github.com/Reference-LAPACK/lapack
-	pushd lapack
-	make
-	popd
+if [[ ! -d lapack ]]; then
+	git clone https://github.com/Reference-LAPACK/lapack
 fi
 
 # }}}
@@ -74,11 +67,11 @@ fi
 # OpenBLAS {{{
 if [[ -d OpenBLAS ]]; then
 	pushd OpenBLAS
-	git pull
+	git checkout develop && git pull
 	make
 	popd
 else
-	git pull https://github.com/xianyi/OpenBLAS
+	git clone https://github.com/xianyi/OpenBLAS
 	pushd OpenBLAS
 	make
 	popd
