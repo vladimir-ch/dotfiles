@@ -1,5 +1,5 @@
 # Antigen {{{
-source "$HOME/bin/antigen.zsh"
+source ~/src/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle command-not-found
 antigen bundle fedora

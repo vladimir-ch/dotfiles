@@ -1,9 +1,13 @@
 " Plugins "{{{
-call plug#begin('~/.vim/plugged')
+" Download vim-plug if missing.
+if empty(glob("~/.vim/autoload/plug.vim"))
+	silent! execute '!curl -fsSLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	autocmd VimEnter * silent! PlugInstall
+endif
 
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'fxn/vim-monochrome'
+call plug#begin()
 
+Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
@@ -15,6 +19,7 @@ Plug 'tpope/vim-sensible'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'wincent/Command-T', { 'do': 'cd ruby/command-t && ruby extconf.rb && make' }
 
+" Plug 'altercation/vim-colors-solarized'
 " Plug 'elzr/vim-json', {'for' : 'json'}
 " Plug 'corylanou/vim-present', {'for' : 'present'}
 " Plug 'mileszs/ack.vim'
