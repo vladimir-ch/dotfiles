@@ -1,0 +1,140 @@
+#!/bin/bash
+
+mkdir -p ~/bin ~/src
+
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+	if ! command -v brew >/dev/null 2>&1; then
+		echo "Installing homebrew"
+		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+
+	if [ -f "$HOME/.Brewfile" ]; then
+		echo "Updating homebrew bundle"
+		brew bundle --global
+	fi
+
+	brew install coreutils findutils
+	alias find='gfind'
+fi
+
+if [ "$system_type" = "Linux" ]; then
+	release=$(lsb_release -d | gawk -F"\t" '{print $2}')
+	case "$release" in
+		Fedora)
+			;;
+		Ubuntu)
+			;;
+	esac
+fi
+
+# Populate ~/src {{{
+pushd ~/src
+
+# antigen {{{
+if [[ -d antigen ]]; then
+	pushd antigen
+	git pull
+	popd
+else
+	git clone https://github.com/zsh-users/antigen.git
+fi
+cp antigen/bin/antigen.zsh ~/bin
+chmod 755 ~/bin/antigen.zsh
+# }}}
+
+# Go font {{{
+if [[ -d image ]]; then
+	pushd image
+	git pull
+	popd
+else
+	git clone https://go.googlesource.com/image
+fi
+mkdir -p ~/.fonts/gofont/ttfs
+cp image/font/gofont/ttfs/* ~/.fonts/gofont/ttfs
+# }}}
+
+# Lapack {{{
+if [[ -d lapack ]]; then
+	pushd lapack 
+	git pull
+	make
+	popd
+else
+	git pull https://github.com/Reference-LAPACK/lapack
+	pushd lapack
+	make
+	popd
+fi
+
+# }}}
+
+# OpenBLAS {{{
+if [[ -d OpenBLAS ]]; then
+	pushd OpenBLAS
+	git pull
+	make
+	popd
+else
+	git pull https://github.com/xianyi/OpenBLAS
+	pushd OpenBLAS
+	make
+	popd
+fi
+# }}}
+
+popd
+# }}} Populate ~/src
+
+# Go {{{
+if [[ ! -d ~/go1.4 ]]; then
+	# Download go1.4 for bootstrapping.
+	osname="$(uname -s | tr '[:upper:]' '[:lower:]')"
+	gofile="go1.4.3.${osname}-amd64.tar.gz"
+	pushd /tmp
+	echo "Downloading $gofile"
+	curl -O https://storage.googleapis.com/golang/$gofile
+	tar xfz $gofile
+	mv go ~/go1.4
+	rm -f $gofile
+	popd
+fi
+if [[ -d ~/go ]] && [[ ! -d ~/go/.git ]]; then
+	# Remove previous binary go installation.
+	rm -rf ~/go
+fi
+if [[ -d ~/go ]]; then
+	# Update go source repository.
+	pushd ~/go
+	git pull
+	popd
+else
+	# Checkout go source repository.
+	pushd ~
+	git clone https://go.googlesource.com/go
+	popd
+fi
+pushd ~/go/src
+git checkout master
+git pull
+./make.bash
+popd
+
+go get -u -v honnef.co/go/tools/...
+
+# }}} Go
+
+# Vim {{{
+mkdir -p ~/.local/vim/{backup,swap,undo}
+pushd ~
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim -c "execute \"PlugUpgrade\" | qa"
+vim -c "execute \"PlugUpdate\" | qa"
+rm -f ~/.vim/autoload/plug.vim.old
+popd
+vim -c "execute \"GoUpdateBinaries\" | qa"
+# }}}
+
+# vim:foldmethod=marker:foldlevel=0
