@@ -15,7 +15,7 @@ if [ "$system_type" = "Darwin" ]; then
 		brew bundle --global
 	fi
 
-	brew install coreutils findutils
+	brew install coreutils findutils cmake
 	alias find='gfind'
 fi
 
