@@ -80,15 +80,15 @@ popd
 # }}} Populate ~/src
 
 # Go {{{
-if [[ ! -d ~/go1.4 ]]; then
-	# Download go1.4 for bootstrapping.
+if [[ ! -d ~/go1.8 ]]; then
+	# Download go1.8 for bootstrapping.
 	osname="$(uname -s | tr '[:upper:]' '[:lower:]')"
-	gofile="go1.4.3.${osname}-amd64.tar.gz"
+	gofile="go1.8.${osname}-amd64.tar.gz"
 	pushd /tmp
 	echo "Downloading $gofile"
 	curl -O https://storage.googleapis.com/golang/$gofile
 	tar xfz $gofile
-	mv go ~/go1.4
+	mv go ~/go1.8
 	rm -f $gofile
 	popd
 fi
@@ -99,7 +99,7 @@ fi
 if [[ -d ~/go ]]; then
 	# Update go source repository.
 	pushd ~/go
-	git pull
+	git checkout master && git pull
 	popd
 else
 	# Checkout go source repository.
@@ -108,9 +108,7 @@ else
 	popd
 fi
 pushd ~/go/src
-git checkout master
-git pull
-./make.bash
+GOROOT_BOOTSTRAP=$HOME/go1.8 ./make.bash
 popd
 
 go get -u -v honnef.co/go/tools/...
