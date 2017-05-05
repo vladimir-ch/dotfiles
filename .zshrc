@@ -2,7 +2,11 @@
 source ~/src/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle command-not-found
-antigen bundle fedora
+if [[ $(uname) == "Darwin" ]]; then
+	antigen bundle osx
+else
+	antigen bundle fedora
+fi
 antigen bundle git
 antigen bundle git-extras
 antigen bundle git-flow
@@ -35,6 +39,8 @@ alias da='date "+%A, %B %d, %Y [%T]"'
 alias du1='du --max-depth=1'
 alias path='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # }}}
 
 # Safety aliases {{{
