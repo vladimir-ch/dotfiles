@@ -235,7 +235,11 @@ colorscheme nofrils-dark
 if has("gui_running")
 	" set guifont=Monospace\ 9
 	" set guifont=Ubuntu\ Mono\ 11
-	set guifont=Go\ Mono\ 10
+	if has("gui_macvim")
+		set guifont=Go\ Mono:h12
+	else
+		set guifont=Go\ Mono\ 10
+	endif
 	" autoselect, simple dialogs, add tab pages, grey menu items
 	set guioptions+=aAceg
 	set guioptions+=tTrlLm
