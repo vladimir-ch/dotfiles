@@ -55,6 +55,10 @@ fzf/install --no-update-rc --key-bindings --completion
 # }}}
 
 # Go font {{{
+font_dir=~/.local/share/fonts/gofont
+if [ "$system_type" = "Darwin" ]; then
+	font_dir=~/Library/Fonts/gofont
+fi
 if [[ -d image ]]; then
 	pushd image
 	git pull
@@ -62,8 +66,8 @@ if [[ -d image ]]; then
 else
 	git clone https://go.googlesource.com/image
 fi
-mkdir -p ~/.fonts/gofont/ttfs
-cp image/font/gofont/ttfs/* ~/.fonts/gofont/ttfs
+mkdir -p $font_dir
+cp image/font/gofont/ttfs/* $font_dir
 # }}}
 
 # Lapack {{{
