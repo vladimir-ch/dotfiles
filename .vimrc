@@ -8,6 +8,7 @@ endif
 call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
+Plug 'dag/vim-fish'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
@@ -17,7 +18,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'wincent/Command-T', { 'do': 'cd ruby/command-t && ruby extconf.rb && make' }
+Plug 'wincent/command-t', {
+    \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+    \ }
 
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'elzr/vim-json', {'for' : 'json'}
@@ -50,6 +53,7 @@ call plug#end()
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 "}}}
 " Settings "{{{
+set shell=/bin/bash
 set autowrite
 set cursorline
 set encoding=utf-8
