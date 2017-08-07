@@ -27,7 +27,16 @@ if status --is-login
 end
 
 if status --is-interactive
-	set CDPATH . ~/src/gonum.org/v1/gonum ~/src/gonum.org/v1
+	set CDPATH .
+	if test -d ~/src/gonum.org/v1/gonum
+		set CDPATH $CDPATH ~/src/gonum.org/v1/gonum
+	end
+	if test -d ~/src/gonum.org/v1
+		set CDPATH $CDPATH ~/src/gonum.org/v1
+	end
+	if test -d ~/cinemo
+		set CDPATH $CDPATH ~/cinemo
+	end
 end
 
 . ~/.config/fish/git.fish
