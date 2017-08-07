@@ -40,3 +40,7 @@ if status --is-interactive
 end
 
 . ~/.config/fish/git.fish
+
+if test -f /etc/fedora-release
+	. ~/.config/fish/fedora.fish
+end
