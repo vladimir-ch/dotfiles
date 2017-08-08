@@ -1,4 +1,6 @@
 function fish_prompt
+	set -l last_status $status
+
 	if not set -q -g __fish_robbyrussell_functions_defined
 		set -g __fish_robbyrussell_functions_defined
 		function _git_branch_name
@@ -44,18 +46,9 @@ function fish_prompt
 		end
 	end
 
-	set -l cyan (set_color -o cyan)
 	set -l yellow (set_color -o yellow)
 	set -l red (set_color -o red)
 	set -l blue (set_color -o blue)
-	set -l normal (set_color normal)
-
-	set -l arrow "$red➜ "
-	if [ $USER = 'root' ]
-		set arrow "$red# "
-	end
-
-	set -l cwd $cyan(basename (prompt_pwd))
 
 	set -l repo_type (_repo_type)
 	if [ $repo_type ]
@@ -68,5 +61,25 @@ function fish_prompt
 		end
 	end
 
-	echo -n -s "$__fish_prompt_hostname :: " $cwd $repo_info $normal ' » '  
+	# Status
+	if test $last_status -ne 0
+		set_color $fish_color_error --bold
+		printf '[%s] ' $last_status
+	end
+
+	# Prefix
+	set_color $fish_color_normal
+	echo -n ':: '
+
+	# PWD
+	set_color $fish_color_cwd
+	echo -n (prompt_pwd)
+
+	# Repository
+	echo -n $repo_info
+
+	# Suffix
+	set_color $fish_color_normal --bold
+	echo -n " » "
+	set_color $fish_color_normal
 end
