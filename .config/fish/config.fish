@@ -15,30 +15,6 @@ alias chgrp='chgrp --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chown='chown --preserve-root'
 
-if status --is-login
-	set -gx GOPATH $HOME
-	if test -d $HOME/go
-		set -gx GOROOT $HOME/go
-		set PATH $GOROOT/bin $PATH
-	end
-	if test -d $HOME/bin
-		set PATH $HOME/bin $PATH
-	end
-end
-
-if status --is-interactive
-	set CDPATH .
-	if test -d ~/src/gonum.org/v1/gonum
-		set CDPATH $CDPATH ~/src/gonum.org/v1/gonum
-	end
-	if test -d ~/src/gonum.org/v1
-		set CDPATH $CDPATH ~/src/gonum.org/v1
-	end
-	if test -d ~/cinemo
-		set CDPATH $CDPATH ~/cinemo
-	end
-end
-
 . ~/.config/fish/git.fish
 
 if test -f /etc/fedora-release
