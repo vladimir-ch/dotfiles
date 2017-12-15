@@ -248,13 +248,16 @@ if has("gui_running")
 	set guioptions-=tTrlLm
 endif
 "}}}
-" Ack "{{{
-" Automatically include quotes, because they never hurt and forgetting
-" them is a pain.
-nnoremap <Leader>a :Ack!<SPACE>"<LEFT>"
-
-" Use <Leader>A to ack for the word under the cursor.
-nnoremap <Leader>A *<C-O>:AckFromSearch!<CR>
+" Ag "{{{
+if executable('ag')
+       set grepprg=ag\ --vimgrep\ --nocolor
+       set grepformat=%f:%l:%c:%m
+       nnoremap <Leader>g :grep<SPACE>"<LEFT>"
+       " Bind K to grep word under cursor.
+       nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+       command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+       nnoremap \ :Ag<SPACE>
+endif
 "}}}
 " Command-T "{{{
 let g:CommandTMaxFiles=160000
