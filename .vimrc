@@ -8,6 +8,7 @@ endif
 call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
+Plug 'altercation/vim-colors-solarized'
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
@@ -20,7 +21,6 @@ Plug 'tpope/vim-sensible'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 
-" Plug 'altercation/vim-colors-solarized'
 " Plug 'elzr/vim-json', {'for' : 'json'}
 " Plug 'corylanou/vim-present', {'for' : 'present'}
 " Plug 'Shougo/neocomplete.vim'
