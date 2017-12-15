@@ -23,11 +23,9 @@ Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extco
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'elzr/vim-json', {'for' : 'json'}
 " Plug 'corylanou/vim-present', {'for' : 'present'}
-" Plug 'mileszs/ack.vim'
 " Plug 'Shougo/neocomplete.vim'
 " Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
 " Plug 'kana/vim-operator-user'
-" Plug 'LaTeX-Suite-aka-Vim-LaTeX'
 " Plug 'tpope/vim-git'
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-scriptease'
@@ -44,7 +42,6 @@ Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extco
 " Plug 'scrooloose/syntastic'
 " Plug 'msanders/snipmate.vim' # triggers completion even after whitespace
 " Plug 'Lokaltog/vim-easymotion'
-" Plug 'hura/vim-asymptote'
 
 call plug#end()
 
@@ -168,7 +165,6 @@ augroup ClangFormatSettings
     autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
     autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 augroup END
-
 let c_space_errors=1
 "}}}
 " Lightline "{{{
@@ -180,7 +176,6 @@ let g:lightline = {
 \		'fugitive': 'LightLineFugitive',
 \	},
 \ }
-
 function! LightLineFugitive()
 	return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
@@ -195,7 +190,6 @@ map <Leader>gd :Gdiff<CR>
 " Gitv.
 map <Leader>gv :Gitv!<CR>
 map <Leader>gV :Gitv<CR>
-
 " Use spell correction and start in insert mode when editing commit messages.
 if has('autocmd')
 	if has('spell')
@@ -227,11 +221,6 @@ endif
 " Colorscheme "{{{
 set background=dark
 colorscheme nofrils-dark
-" colorscheme monochrome
-" colorscheme solarized
-" if exists("g:solarized_hitrail")
-" 	let g:solarized_hitrail=1
-" endif
 "}}}
 " GUI {{{
 if has("gui_running")
@@ -278,22 +267,6 @@ let NERDTreeWinSize=50
 " YCM "{{{
 let g:ycm_confirm_extra_conf=0
 map <Leader>gt :YcmCompleter GoTo<CR>
-"}}}
-
-" Doxygen "{{{
-" let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
-" let g:DoxygenToolkit_paramTag_pre="@Param "
-" let g:DoxygenToolkit_returnTag="@Returns   "
-" let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
-" let g:DoxygenToolkit_blockFooter="----------------------------------------------------------------------------"
-" let g:DoxygenToolkit_authorName="Vladimir Chalupecky"
-"}}}
-" LaTeX-Suite "{{{
-" let g:Tex_DefaultTargetFormat='pdf'
-" let g:Tex_CompileRule_pdf='xelatex --interaction=nonstopmode $*'
-" let g:Tex_ViewRule_pdf='evince'
-" let g:Tex_SmartKeyQuote=0
-" au FileType tex setlocal iskeyword+=:
 "}}}
 
 " vim:foldmethod=marker:foldlevel=0
