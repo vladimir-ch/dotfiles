@@ -21,6 +21,9 @@ Plug 'tpope/vim-sensible'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'wincent/command-t', { 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make' }
 
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-mark'
+
 " Plug 'elzr/vim-json', {'for' : 'json'}
 " Plug 'corylanou/vim-present', {'for' : 'present'}
 " Plug 'Shougo/neocomplete.vim'
@@ -220,7 +223,7 @@ endif
 "}}}
 " Colorscheme "{{{
 set background=dark
-colorscheme nofrils-dark
+colorscheme solarized
 "}}}
 " GUI {{{
 if has("gui_running")
