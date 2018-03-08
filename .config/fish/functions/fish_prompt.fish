@@ -1,6 +1,10 @@
 function fish_prompt
 	set -l last_status $status
 
+	if not set -q __fish_prompt_hostname
+		set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
+	end
+
 	if not set -q -g __fish_robbyrussell_functions_defined
 		set -g __fish_robbyrussell_functions_defined
 		function _git_branch_name
@@ -69,7 +73,7 @@ function fish_prompt
 
 	# Prefix
 	set_color $fish_color_normal
-	echo -n ':: '
+	echo -n ":: $__fish_prompt_hostname" ''
 
 	# PWD
 	set_color $fish_color_cwd
