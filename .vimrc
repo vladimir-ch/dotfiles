@@ -57,7 +57,7 @@ set cursorline
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set nojoinspaces
-set wrap
+set nowrap
 set scrolloff=5
 set showcmd
 set spelllang=en_us
