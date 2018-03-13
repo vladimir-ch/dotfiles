@@ -17,6 +17,10 @@ alias chown='chown --preserve-root'
 
 . ~/.config/fish/git.fish
 
+if test -f /usr/share/fzf/shell/key-bindings.fish
+	. /usr/share/fzf/shell/key-bindings.fish
+end
+
 if test -f /etc/fedora-release
 	. ~/.config/fish/fedora.fish
 end
